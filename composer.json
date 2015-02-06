@@ -1,0 +1,31 @@
+{
+	"name" : "intendit/gmaps",
+	"description" : "A google maps extension",
+	"type" : "bolt-extension",
+	"keywords" : [
+		"google maps",
+        "google",
+        "maps"
+	],
+	"require" : {
+		"bolt/bolt" : ">=2.0.0,<3.0.0",
+		"php" : ">=5.3"
+	},
+	"license" : "GPL",
+	"authors" : [{
+			"name" : "Svante Richter",
+			"email" : "svr@intendit.se"
+		}
+	],
+	"autoload" : {
+		"files" : [
+			"init.php"
+		],
+		"psr-4" : {
+			"intendit\\gmaps\\" : [
+				"",
+				"src/"
+			]
+		}
+	}
+}
