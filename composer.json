@@ -22,10 +22,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"intendit\\gmaps\\" : [
-				"",
-				"src/"
-			]
+			"Bolt\\Extension\\intendit\\gmaps\\": ""
 		}
 	}
 }
