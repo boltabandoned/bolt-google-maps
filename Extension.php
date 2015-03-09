@@ -27,9 +27,9 @@ class Extension extends \Bolt\BaseExtension
                 $defaultzoom = 14;
             }
             
-            $snippet = '<script defer="defer" src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initializeMap"></script><script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script>';
+            $snippet = '<script defer="defer" src="https://maps.googleapis.com/maps/api/js?v=3.exp%26callback=initializeMap"></script><script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script>';
             if (!$this->app['config']->get('general/disable_script_injecting')){
-                $snippet .= '<script defer="defer" src="/extensions/local/intendit/gmaps/assets/gmaps.js"></script>';
+                $snippet .= '<script defer="defer" src="/extensions/vendor/intendit/gmaps/assets/gmaps.js"></script>';
             }
             
               $this->addTwigFunction('gmaps', 'gmapsExt');
