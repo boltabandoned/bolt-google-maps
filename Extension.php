@@ -39,7 +39,7 @@ class Extension extends \Bolt\BaseExtension
         /**
          * Twig function {{ foo("var1", "var2") }} in Namespace extension.
          */
-        function gmapsExt($latitude, $longitude, $html = "", $icon = false, $color = "rgba(0,0,0,1)")
+        function gmapsExt($latitude = 1, $longitude = 1, $html = "", $icon = "map-marker", $color = "rgba(0,0,0,1)")
         {
             $str = "<div class='map-canvas' data-mapobj='[{\"latitude\":$latitude,\"longitude\":$longitude,\"html\": \"$html\",\"icon\":\"$icon\"}]'></div>";
             return new \Twig_Markup($str, 'UTF-8');
