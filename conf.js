@@ -1,144 +1,48 @@
-function mapInit() {
-    var e = [{
-        featureType: "water",
-        elementType: "all",
-        stylers: [{
-            color: "#3b5998"
-        }]
-    }, {
-        featureType: "administrative.province",
-        elementType: "all",
-        stylers: [{
-            visibility: "off"
-        }]
-    }, {
-        featureType: "all",
-        elementType: "all",
-        stylers: [{
-            hue: "#3b5998"
-        }, {
-            saturation: -22
-        }]
-    }, {
-        featureType: "landscape",
-        elementType: "all",
-        stylers: [{
-            visibility: "on"
-        }, {
-            color: "#f7f7f7"
-        }, {
-            saturation: 10
-        }, {
-            lightness: 76
-        }]
-    }, {
-        featureType: "landscape.natural",
-        elementType: "all",
-        stylers: [{
-            color: "#f7f7f7"
-        }]
-    }, {
-        featureType: "road.highway",
-        elementType: "all",
-        stylers: [{
-            color: "#8b9dc3"
-        }]
-    }, {
-        featureType: "administrative.country",
-        elementType: "geometry.stroke",
-        stylers: [{
-            visibility: "simplified"
-        }, {
-            color: "#3b5998"
-        }]
-    }, {
-        featureType: "road.highway",
-        elementType: "all",
-        stylers: [{
-            visibility: "on"
-        }, {
-            color: "#8b9dc3"
-        }]
-    }, {
-        featureType: "road.highway",
-        elementType: "all",
-        stylers: [{
-            visibility: "simplified"
-        }, {
-            color: "#8b9dc3"
-        }]
-    }, {
-        featureType: "transit.line",
-        elementType: "all",
-        stylers: [{
-            invert_lightness: false
-        }, {
-            color: "#ffffff"
-        }, {
-            weight: .43
-        }]
-    }, {
-        featureType: "road.highway",
-        elementType: "labels.icon",
-        stylers: [{
-            visibility: "off"
-        }]
-    }, {
-        featureType: "road.local",
-        elementType: "geometry.fill",
-        stylers: [{
-            color: "#8b9dc3"
-        }]
-    }, {
-        featureType: "administrative",
-        elementType: "labels.icon",
-        stylers: [{
-            visibility: "on"
-        }, {
-            color: "#3b5998"
-        }]
-    }];
-    [].forEach.call(document.getElementsByClassName("map-canvas"), function (elem) {
-        var locations = JSON.parse(elem.dataset.mapObj);
-        console.log(locations)
-        var n = {
-            disableDefaultUI: true,
-        };
-        if (typeof mapstyles === "undefined") {
-            n.styles = e
-        } else {
-            n.styles = mapstyles
-        }
-        var map = new google.maps.Map(elem, n);
-        //create empty LatLngBounds object
-        var bounds = new google.maps.LatLngBounds();
-        var infowindow = new google.maps.InfoWindow();
-
-        for (i = 0; i < locations.length; i++) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                map: map
-            });
-
-            //extend the bounds to include each markers position
-            bounds.extend(marker.position);
-
-            google.maps.event.addListener(marker, "click", (function (marker, i) {
-                return function () {
-                    infowindow.setContent(locations[i][0]);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-        }
-
-        //now fit the map to the newly inclusive bounds
-        map.fitBounds(bounds);
-
-        //(optional) restore the zoom level after the map is done scaling
-        var listener = google.maps.event.addListener(map, "idle", function () {
-            map.setZoom(3);
-            google.maps.event.removeListener(listener);
-        });
-    });
+/*
+ * JS from extension gmaps
+*/
+if(document.getElementsByClassName("map-canvas").length() > 0){
+    document.write('<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;callback=initializeMap"><\/script>')
 }
-google.maps.event.addDomListener(window, "load", mapInit())
+function initializeMap(){
+/**
+ * @name MarkerWithLabel for V3
+ * @version 1.1.10 [April 8, 2014]
+ * @author Gary Little (inspired by code from Marc Ridey of Google).
+ * @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
+ * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
+ *  <code>google.maps.Marker</code> class.
+ *  <p>
+ *  MarkerWithLabel allows you to define markers with associated labels. As you would expect,
+ *  if the marker is draggable, so too will be the label. In addition, a marker with a label
+ *  responds to all mouse events in the same manner as a regular marker. It also fires mouse
+ *  events and "property changed" events just as a regular marker would. Version 1.1 adds
+ *  support for the raiseOnDrag feature introduced in API V3.3.
+ *  <p>
+ *  If you drag a marker by its label, you can cancel the drag and return the marker to its
+ *  original position by pressing the <code>Esc</code> key. This doesn't work if you drag the marker
+ *  itself because this feature is not (yet) supported in the <code>google.maps.Marker</code> class.
+ */
+
+/*!
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+function inherits(e,t){function i(){}i.prototype=t.prototype,e.superClass_=t.prototype,e.prototype=new i,e.prototype.constructor=e}function MarkerLabel_(e,t){this.marker_=e,this.handCursorURL_=e.handCursorURL,this.labelDiv_=document.createElement("div"),this.labelDiv_.style.cssText="position: absolute; overflow: hidden;",this.eventDiv_=document.createElement("div"),this.eventDiv_.style.cssText=this.labelDiv_.style.cssText,this.eventDiv_.setAttribute("onselectstart","return false;"),this.eventDiv_.setAttribute("ondragstart","return false;"),this.crossDiv_=MarkerLabel_.getSharedCross(t)}function MarkerWithLabel(e){e=e||{},e.labelContent=e.labelContent||"",e.labelAnchor=e.labelAnchor||new google.maps.Point(0,0),e.labelClass=e.labelClass||"markerLabels",e.labelStyle=e.labelStyle||{},e.labelInBackground=e.labelInBackground||!1,"undefined"==typeof e.labelVisible&&(e.labelVisible=!0),"undefined"==typeof e.raiseOnDrag&&(e.raiseOnDrag=!0),"undefined"==typeof e.clickable&&(e.clickable=!0),"undefined"==typeof e.draggable&&(e.draggable=!1),"undefined"==typeof e.optimized&&(e.optimized=!1),e.crossImage=e.crossImage||"http"+("https:"===document.location.protocol?"s":"")+"://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png",e.handCursor=e.handCursor||"http"+("https:"===document.location.protocol?"s":"")+"://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur",e.optimized=!1,this.label=new MarkerLabel_(this,e.crossImage,e.handCursor),google.maps.Marker.apply(this,arguments)}inherits(MarkerLabel_,google.maps.OverlayView),MarkerLabel_.getSharedCross=function(e){var t;return"undefined"==typeof MarkerLabel_.getSharedCross.crossDiv&&(t=document.createElement("img"),t.style.cssText="position: absolute; z-index: 1000002; display: none;",t.style.marginLeft="-8px",t.style.marginTop="-9px",t.src=e,MarkerLabel_.getSharedCross.crossDiv=t),MarkerLabel_.getSharedCross.crossDiv},MarkerLabel_.prototype.onAdd=function(){var e,t,i,s,a,r,o,n=this,l=!1,g=!1,p=20,_="url("+this.handCursorURL_+")",h=function(e){e.preventDefault&&e.preventDefault(),e.cancelBubble=!0,e.stopPropagation&&e.stopPropagation()},v=function(){n.marker_.setAnimation(null)};this.getPanes().overlayImage.appendChild(this.labelDiv_),this.getPanes().overlayMouseTarget.appendChild(this.eventDiv_),"undefined"==typeof MarkerLabel_.getSharedCross.processed&&(this.getPanes().overlayImage.appendChild(this.crossDiv_),MarkerLabel_.getSharedCross.processed=!0),this.listeners_=[google.maps.event.addDomListener(this.eventDiv_,"mouseover",function(e){(n.marker_.getDraggable()||n.marker_.getClickable())&&(this.style.cursor="pointer",google.maps.event.trigger(n.marker_,"mouseover",e))}),google.maps.event.addDomListener(this.eventDiv_,"mouseout",function(e){!n.marker_.getDraggable()&&!n.marker_.getClickable()||g||(this.style.cursor=n.marker_.getCursor(),google.maps.event.trigger(n.marker_,"mouseout",e))}),google.maps.event.addDomListener(this.eventDiv_,"mousedown",function(e){g=!1,n.marker_.getDraggable()&&(l=!0,this.style.cursor=_),(n.marker_.getDraggable()||n.marker_.getClickable())&&(google.maps.event.trigger(n.marker_,"mousedown",e),h(e))}),google.maps.event.addDomListener(document,"mouseup",function(t){var i;if(l&&(l=!1,n.eventDiv_.style.cursor="pointer",google.maps.event.trigger(n.marker_,"mouseup",t)),g){if(a){i=n.getProjection().fromLatLngToDivPixel(n.marker_.getPosition()),i.y+=p,n.marker_.setPosition(n.getProjection().fromDivPixelToLatLng(i));try{n.marker_.setAnimation(google.maps.Animation.BOUNCE),setTimeout(v,1406)}catch(r){}}n.crossDiv_.style.display="none",n.marker_.setZIndex(e),s=!0,g=!1,t.latLng=n.marker_.getPosition(),google.maps.event.trigger(n.marker_,"dragend",t)}}),google.maps.event.addListener(n.marker_.getMap(),"mousemove",function(s){var _;l&&(g?(s.latLng=new google.maps.LatLng(s.latLng.lat()-t,s.latLng.lng()-i),_=n.getProjection().fromLatLngToDivPixel(s.latLng),a&&(n.crossDiv_.style.left=_.x+"px",n.crossDiv_.style.top=_.y+"px",n.crossDiv_.style.display="",_.y-=p),n.marker_.setPosition(n.getProjection().fromDivPixelToLatLng(_)),a&&(n.eventDiv_.style.top=_.y+p+"px"),google.maps.event.trigger(n.marker_,"drag",s)):(t=s.latLng.lat()-n.marker_.getPosition().lat(),i=s.latLng.lng()-n.marker_.getPosition().lng(),e=n.marker_.getZIndex(),r=n.marker_.getPosition(),o=n.marker_.getMap().getCenter(),a=n.marker_.get("raiseOnDrag"),g=!0,n.marker_.setZIndex(1e6),s.latLng=n.marker_.getPosition(),google.maps.event.trigger(n.marker_,"dragstart",s)))}),google.maps.event.addDomListener(document,"keydown",function(e){g&&27===e.keyCode&&(a=!1,n.marker_.setPosition(r),n.marker_.getMap().setCenter(o),google.maps.event.trigger(document,"mouseup",e))}),google.maps.event.addDomListener(this.eventDiv_,"click",function(e){(n.marker_.getDraggable()||n.marker_.getClickable())&&(s?s=!1:(google.maps.event.trigger(n.marker_,"click",e),h(e)))}),google.maps.event.addDomListener(this.eventDiv_,"dblclick",function(e){(n.marker_.getDraggable()||n.marker_.getClickable())&&(google.maps.event.trigger(n.marker_,"dblclick",e),h(e))}),google.maps.event.addListener(this.marker_,"dragstart",function(){g||(a=this.get("raiseOnDrag"))}),google.maps.event.addListener(this.marker_,"drag",function(){g||a&&(n.setPosition(p),n.labelDiv_.style.zIndex=1e6+(this.get("labelInBackground")?-1:1))}),google.maps.event.addListener(this.marker_,"dragend",function(){g||a&&n.setPosition(0)}),google.maps.event.addListener(this.marker_,"position_changed",function(){n.setPosition()}),google.maps.event.addListener(this.marker_,"zindex_changed",function(){n.setZIndex()}),google.maps.event.addListener(this.marker_,"visible_changed",function(){n.setVisible()}),google.maps.event.addListener(this.marker_,"labelvisible_changed",function(){n.setVisible()}),google.maps.event.addListener(this.marker_,"title_changed",function(){n.setTitle()}),google.maps.event.addListener(this.marker_,"labelcontent_changed",function(){n.setContent()}),google.maps.event.addListener(this.marker_,"labelanchor_changed",function(){n.setAnchor()}),google.maps.event.addListener(this.marker_,"labelclass_changed",function(){n.setStyles()}),google.maps.event.addListener(this.marker_,"labelstyle_changed",function(){n.setStyles()})]},MarkerLabel_.prototype.onRemove=function(){var e;for(this.labelDiv_.parentNode.removeChild(this.labelDiv_),this.eventDiv_.parentNode.removeChild(this.eventDiv_),e=0;e<this.listeners_.length;e++)google.maps.event.removeListener(this.listeners_[e])},MarkerLabel_.prototype.draw=function(){this.setContent(),this.setTitle(),this.setStyles()},MarkerLabel_.prototype.setContent=function(){var e=this.marker_.get("labelContent");"undefined"==typeof e.nodeType?(this.labelDiv_.innerHTML=e,this.eventDiv_.innerHTML=this.labelDiv_.innerHTML):(this.labelDiv_.innerHTML="",this.labelDiv_.appendChild(e),e=e.cloneNode(!0),this.eventDiv_.innerHTML="",this.eventDiv_.appendChild(e))},MarkerLabel_.prototype.setTitle=function(){this.eventDiv_.title=this.marker_.getTitle()||""},MarkerLabel_.prototype.setStyles=function(){var e,t;this.labelDiv_.className=this.marker_.get("labelClass"),this.eventDiv_.className=this.labelDiv_.className,this.labelDiv_.style.cssText="",this.eventDiv_.style.cssText="",t=this.marker_.get("labelStyle");for(e in t)t.hasOwnProperty(e)&&(this.labelDiv_.style[e]=t[e],this.eventDiv_.style[e]=t[e]);this.setMandatoryStyles()},MarkerLabel_.prototype.setMandatoryStyles=function(){this.labelDiv_.style.position="absolute",this.labelDiv_.style.overflow="hidden","undefined"!=typeof this.labelDiv_.style.opacity&&""!==this.labelDiv_.style.opacity&&(this.labelDiv_.style.MsFilter='"progid:DXImageTransform.Microsoft.Alpha(opacity='+100*this.labelDiv_.style.opacity+')"',this.labelDiv_.style.filter="alpha(opacity="+100*this.labelDiv_.style.opacity+")"),this.eventDiv_.style.position=this.labelDiv_.style.position,this.eventDiv_.style.overflow=this.labelDiv_.style.overflow,this.eventDiv_.style.opacity=.01,this.eventDiv_.style.MsFilter='"progid:DXImageTransform.Microsoft.Alpha(opacity=1)"',this.eventDiv_.style.filter="alpha(opacity=1)",this.setAnchor(),this.setPosition(),this.setVisible()},MarkerLabel_.prototype.setAnchor=function(){var e=this.marker_.get("labelAnchor");this.labelDiv_.style.marginLeft=-e.x+"px",this.labelDiv_.style.marginTop=-e.y+"px",this.eventDiv_.style.marginLeft=-e.x+"px",this.eventDiv_.style.marginTop=-e.y+"px"},MarkerLabel_.prototype.setPosition=function(e){var t=this.getProjection().fromLatLngToDivPixel(this.marker_.getPosition());"undefined"==typeof e&&(e=0),this.labelDiv_.style.left=Math.round(t.x)+"px",this.labelDiv_.style.top=Math.round(t.y-e)+"px",this.eventDiv_.style.left=this.labelDiv_.style.left,this.eventDiv_.style.top=this.labelDiv_.style.top,this.setZIndex()},MarkerLabel_.prototype.setZIndex=function(){var e=this.marker_.get("labelInBackground")?-1:1;"undefined"==typeof this.marker_.getZIndex()?(this.labelDiv_.style.zIndex=parseInt(this.labelDiv_.style.top,10)+e,this.eventDiv_.style.zIndex=this.labelDiv_.style.zIndex):(this.labelDiv_.style.zIndex=this.marker_.getZIndex()+e,this.eventDiv_.style.zIndex=this.labelDiv_.style.zIndex)},MarkerLabel_.prototype.setVisible=function(){this.labelDiv_.style.display=this.marker_.get("labelVisible")&&this.marker_.getVisible()?"block":"none",this.eventDiv_.style.display=this.labelDiv_.style.display},inherits(MarkerWithLabel,google.maps.Marker),MarkerWithLabel.prototype.setMap=function(e){google.maps.Marker.prototype.setMap.apply(this,arguments),this.label.setMap(e)};
+
+/*
+ * Intendit map config
+*/
+function mapInit(){Array.prototype.forEach.call(document.getElementsByClassName("map-canvas"),function(e){var t=JSON.parse(e.dataset.mapobj);var n={disableDefaultUI:true,styles:mapstyles,scrollwheel: false,navigationControl: false,mapTypeControl: false,scaleControl: false,draggable: false,disableDefaultUI:true};var r=new google.maps.Map(e,n);var s=new google.maps.LatLngBounds;var o=new google.maps.InfoWindow;for(i=0;i<t.length;i++){if(t[i].icon){var u=new MarkerWithLabel({labelAnchor:new google.maps.Point(8,22),icon: " ",labelContent: "<i class=\"fa fa-"+t[i].icon+" fa-2x\" style=\"color:"+t[i].color+";\"></i>",labelStyle: {color: t[i].color}, position:new google.maps.LatLng(t[i].latitude,t[i].longitude),map:r});}else{var u=new google.maps.Marker({position:new google.maps.LatLng(t[i].latitude,t[i].longitude),map:r});} s.extend(u.position);google.maps.event.addListener(u,"click",function(e,n){return function(){o.setContent("<div class=\"mapContent\">"+t[n].html+"</div>");o.open(r,e)}}(u,i))}r.fitBounds(s);if(t.length==1){var e=google.maps.event.addListener(r,"idle",function(){r.setZoom(defaultzoom);google.maps.event.removeListener(e)});window.onresize=function(){r.fitBounds(s);r.setZoom(defaultzoom);}}else{window.onresize=function(){r.fitBounds(s);}}})}google.maps.event.addDomListener(window,"load",mapInit())
+}
