@@ -27,7 +27,11 @@ class Extension extends \Bolt\BaseExtension
                 $defaultzoom = 14;
             }
             
+<<<<<<< HEAD
             $snippet = '<script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script>';
+=======
+            $snippet = '<script defer="defer" src="https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initializeMap"></script><script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script>';
+>>>>>>> 95ad1bb00997537a4f5689eccc3892b9d8478e70
             if (!$this->app['config']->get('general/disable_script_injecting')){
                 $snippet .= '<script defer="defer" src="/extensions/vendor/intendit/gmaps/assets/gmaps.js"></script>';
             }
