@@ -1,8 +1,8 @@
 <?php
 /**
- * Skeleton extension for Bolt
+ * Gmaps extension for Bolt
  *
- * Copyright (C) 2014  John Doe
+ * Copyright (C) 2014  Svante Richter
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @author
- * @copyright
+ * @author    Svante Richter
+ * @copyright Svante Richter (Is this even right?! Am I supposed to put my name here?)
  * @license   http://opensource.org/licenses/GPL-3.0 GNU Public License 3.0
  */
-use Bolt\Extension\intendit\gmaps\Extension;
+use Bolt\Extension\sahassar\gmaps\Extension;
 
 $app['extensions']->register(new Extension($app));
