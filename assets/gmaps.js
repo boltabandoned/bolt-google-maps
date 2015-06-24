@@ -1,3 +1,9 @@
+/*
+ * JS from extension gmaps
+*/
+if(document.getElementsByClassName("map-canvas").length > 0){
+    document.write('<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;callback=initializeMap"><\/script>')
+}
 function initializeMap(){
 /**
  * @name MarkerWithLabel for V3

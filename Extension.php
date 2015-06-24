@@ -29,7 +29,7 @@ class Extension extends \Bolt\BaseExtension
             
             $snippet = '<script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script>';
             if (!$this->app['config']->get('general/disable_script_injecting')){
-                $snippet .= '<script defer="defer" src="/extensions/vendor/intendit/gmaps/assets/gmaps.js"></script>';
+                $snippet .= '<script src="/extensions/vendor/intendit/gmaps/assets/gmaps.js"></script>';
             }
             
               $this->addTwigFunction('gmaps', 'gmapsExt');
