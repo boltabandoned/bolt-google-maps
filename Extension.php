@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\intendit\gmaps;
+namespace Bolt\Extension\boltabandoned\gmaps;
 
 class Extension extends \Bolt\BaseExtension
 {
