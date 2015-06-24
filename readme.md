@@ -3,15 +3,17 @@ Google maps extension
 
 Usage:
 
-<<<<<<< HEAD
 Requires font awesome to be loaded as it is used for all map icons.
 
-With twig: 
+In twig: 
 =======
 Single marker: 
->>>>>>> origin/master
 
-    {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
+    {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title, icon, color) }}
+    
+All arguments are optional, though it is reccomended that you use lognitude, latitude and title arguments.
+
+The title argument supports HTML so you can implement all sorts of functionality there.
 
 Multiple markers:
 
@@ -21,6 +23,18 @@ Multiple markers:
     {"latitude":{{map.geolocation.latitude}},"longitude":{{map.geolocation.longitude}},"html": "{{map.title}}","icon":"map-marker"}
     {% if not loop.last %},{% endif %}{% endfor %}
     ]'></div>
+
+Basically it's a json array of objects with: latitude, longitude, html, icon, color.
+
+For example it looks loke this in the end:
+
+    <div class="map-canvas" data-mapobj="[
+    {"latitude":59.9138688,"longitude":10.752245399999993,"html": "Beatum, inquit.","icon":"map-marker"}
+    ,{"latitude":55.6760968,"longitude":12.568337100000008,"html": "Atqui reperies, inquit, in hoc quidem pertinacem;","icon":"map-marker"}
+    ,{"latitude":55.604981,"longitude":13.003822000000014,"html": "Dat enim intervalla et relaxat.","icon":"map-marker"}
+    ,{"latitude":59.32932349999999,"longitude":18.068580800000063,"html": "Bonum incolumis acies: misera caecitas.","icon":"map-marker"}
+    ,{"latitude":60.17332440000001,"longitude":24.941024800000037,"html": "Prioris generis est docilitas, memoria;","icon":"map-marker"}
+    ]"></div>
 
 Notes:
 

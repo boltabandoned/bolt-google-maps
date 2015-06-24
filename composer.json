@@ -22,7 +22,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"Bolt\\Extension\\intendit\\gmaps\\": ""
+			"Bolt\\Extension\\boltabandoned\\gmaps\\": ""
 		}
 	}
 }
