@@ -3,11 +3,11 @@ Google maps extension
 
 Usage:
 
-With twig: 
+Single marker: 
 
     {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
 
-With html (for multiple markers):
+Multiple markers:
 
     {% setcontent maps = "/pages/latest/20" %}
     <div class='map-canvas' data-mapobj='[
