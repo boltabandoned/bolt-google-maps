@@ -8,8 +8,7 @@
         "maps"
 	],
 	"require" : {
-		"bolt/bolt" : ">=2.0.0,<3.0.0",
-		"php" : ">=5.3"
+		"bolt/bolt": ">=2.2.0,<3.0.0"
 	},
 	"license" : "GPL",
 	"authors" : [{
