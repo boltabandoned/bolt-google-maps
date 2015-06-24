@@ -1,5 +1,5 @@
 {
-	"name" : "intendit/gmaps",
+	"name" : "sahassar/gmaps",
 	"description" : "A google maps extension",
 	"type" : "bolt-extension",
 	"keywords" : [
@@ -14,7 +14,7 @@
 	"license" : "GPL",
 	"authors" : [{
 			"name" : "Svante Richter",
-			"email" : "svr@intendit.se"
+			"email" : "svante.richter@gmail.com"
 		}
 	],
 	"autoload" : {

@@ -3,13 +3,17 @@ Google maps extension
 
 Usage:
 
+<<<<<<< HEAD
 Requires font awesome to be loaded as it is used for all map icons.
 
 With twig: 
+=======
+Single marker: 
+>>>>>>> origin/master
 
-{{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
+    {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
 
-With html (for multiple markers):
+Multiple markers:
 
     {% setcontent maps = "/pages/latest/20" %}
     <div class='map-canvas' data-mapobj='[
