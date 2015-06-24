@@ -1,5 +1,5 @@
 {
-	"name" : "intendit/gmaps",
+	"name" : "boltabandoned/gmaps",
 	"description" : "A google maps extension",
 	"type" : "bolt-extension",
 	"keywords" : [
@@ -14,7 +14,7 @@
 	"license" : "GPL",
 	"authors" : [{
 			"name" : "Alan Smithee",
-			"email" : "svr@intendit.se"
+			"email" : "alan.smithee@example.com"
 		}
 	],
 	"autoload" : {
