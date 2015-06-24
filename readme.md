@@ -9,7 +9,12 @@ With twig:
 
 With html (for multiple markers):
 
-<div class='map-canvas' data-mapobj='[{"latitude": 52.608489,"longitude": 11.01139,"html": "test"},{"latitude": 34.608489,"longitude": 3.01139,"html": "test2"}]'></div>
+    {% setcontent maps = "/pages/latest/20" %}
+    <div class='map-canvas' data-mapobj='[
+    {% for map in maps %}
+    {"latitude":{{map.geolocation.latitude}},"longitude":{{map.geolocation.longitude}},"html": "{{map.title}}","icon":"map-marker"}
+    {% if not loop.last %},{% endif %}{% endfor %}
+    ]'></div>
 
 Notes:
 
