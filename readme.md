@@ -3,6 +3,8 @@ Google maps extension
 
 Usage:
 
+Requires font awesome to be loaded as it is used for all map icons.
+
 With twig: 
 
 {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
