@@ -5,7 +5,7 @@ Usage:
 
 With twig: 
 
-{{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
+    {{ gmaps(record.geolocation.latitude, record.geolocation.longitude, record.title) }}
 
 With html (for multiple markers):
 
