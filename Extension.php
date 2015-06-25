@@ -30,7 +30,7 @@ class Extension extends \Bolt\BaseExtension
             $snippet = '<script>var mapstyles = '.$mapstyles.', defaultzoom = '.$defaultzoom.';</script><style>.map-canvas{height:50vh;}</style>';
             if (!$this->app['config']->get('general/disable_script_injecting')){
                 $this->addJavascript('/assets/gmaps.js');
-                $this->addCss('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+                $snippet .='<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>';
             }
             
             $this->addTwigFunction('gmaps', 'gmapsExt');
