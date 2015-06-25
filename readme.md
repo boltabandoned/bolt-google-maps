@@ -26,7 +26,7 @@ Multiple markers:
 
 Basically it's a json array of objects with: latitude, longitude, html, icon, color.
 
-For example it looks loke this in the end:
+For an example of what it looks like this in the end:
 
     <div class="map-canvas" data-mapobj="[
     {"latitude":59.9138688,"longitude":10.752245399999993,"html": "Beatum, inquit.","icon":"map-marker"}
