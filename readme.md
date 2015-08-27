@@ -41,3 +41,6 @@ Notes:
 Be sure to give ".map-canvas" a height in your css since you will otherwise not see the map.
 
 If using foundation or other frameworks that give "img" a max-width you need to reset this for the map by giving ".map-canvas img" a max-width of "none" in your css.
+
+
+Extension icon (Map) by Paul Stevens from the Noun Project.
