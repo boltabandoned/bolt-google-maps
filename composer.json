@@ -1,5 +1,5 @@
 {
-	"name" : "sahassar/gmaps",
+	"name" : "sahassar/googlemaps",
 	"description" : "A google maps extension",
 	"type" : "bolt-extension",
 	"keywords" : [
@@ -22,7 +22,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"Bolt\\Extension\\sahassar\\gmaps\\": ""
+			"Bolt\\Extension\\sahassar\\googlemaps\\": ""
 		}
 	},
     "extra": {

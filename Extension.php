@@ -1,11 +1,11 @@
 <?php
-namespace Bolt\Extension\sahassar\gmaps;
+namespace Bolt\Extension\sahassar\googlemaps;
 class Extension extends \Bolt\BaseExtension
 {
 
     public function getName()
     {
-        return 'gmaps';
+        return 'Google Maps';
     }
 
     function initialize()
