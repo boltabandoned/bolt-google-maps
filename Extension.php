@@ -11,7 +11,7 @@ class Extension extends \Bolt\BaseExtension
     function initialize()
     {
         if ($this->app['config']->getWhichEnd()=='frontend') {
-            if ($this->app['config']->get('general/disable_script_injecting')){
+            if (!$this->app['config']->get('general/disable_script_injecting')){
                 $this->addJavascript(
                     'assets/gmaps.js',
                     array('late' => true, 'priority' => 1000)
