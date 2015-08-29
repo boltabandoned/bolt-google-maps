@@ -16,7 +16,7 @@ A simple map is usually constructed with named values passed to the map() functi
         latitude = record.geolocation.latitude,
         longitude = record.geolocation.longitude,
         html = record.body,
-        icon = "fa-map-marker",
+        icon = "fa-map-marker"
     )}}
 
 ####Single geolocation field
@@ -28,9 +28,9 @@ You can also supply it with the geolocation field directly like this:
 You can set the HTML for the infopopup via the `html` argument. The default is the `formatted_address` of the geolocation field. You can also set the map icon with the `icon` argument:
 
     {{map(
-        map = record.geolocation
+        map = record.geolocation,
         html = record.body,
-        icon = "fa-map-marker",
+        icon = "fa-map-marker"
     )}}
 
 ####Multiple geolocation fields
@@ -52,11 +52,11 @@ You can also pass a single record, which will assume that your geolocation field
 You can change where it looks for these values by following this example:
 
     {{map(
-        record = record
+        record = record,
         geolocation-field = "geolocation",
         html_field = "body",
         icon_field = "icon",
-        color_field = "color",
+        color_field = "color"
     )}}
     
 The values passed are the names of the fields you want to use for the respective property.
@@ -70,11 +70,11 @@ Just like passing a record you can also pass multiple records to the function. J
 And overwriting what values to use also works just like a single record:
 
     {{map(
-        records = records
+        records = records,
         geolocation_field = "geolocation",
         html_field = "body",
         icon_field = "icon",
-        color_field = "color",
+        color_field = "color"
     )}}
 
 ####A couple of notes:
