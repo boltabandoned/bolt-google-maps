@@ -1,5 +1,5 @@
 <?php
-namespace Bolt\Extension\boltabandoned\googlemaps;
+namespace Bolt\Extension\boltabandoned\gmaps;
 class Extension extends \Bolt\BaseExtension
 {
 

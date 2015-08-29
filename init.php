@@ -21,6 +21,6 @@
  * @copyright Alan Smithee (Is this even right?! Am I supposed to put my name here?)
  * @license   http://opensource.org/licenses/GPL-3.0 GNU Public License 3.0
  */
-use Bolt\Extension\boltabandoned\googlemaps\Extension;
+use Bolt\Extension\boltabandoned\gmaps\Extension;
 
 $app['extensions']->register(new Extension($app));
