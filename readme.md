@@ -82,3 +82,27 @@ And overwriting what values to use also works just like a single record:
  - If you put the `disable_script_injecting: true` in the global config the extension will not load it's usual scripts and styles. This is useful for when you want to include them in your own scripts and styles, load them via a cdn or modify them.
  - You can change the mapstyles and the defualt zoom level by setting `window.mapstyles` and `window.defaultzoom` before this scripts execution. Becuase it's script priority is set high, all your JS should be loaded before it.
  - The extensions fontawesome only has the woff file embeded, and therefore will not be compatible with IE8-. If you want comaptability with IE8- you need to put `disable_script_injecting: true` in your main configuration and load your own fontawesome.
+
+####Licenses
+
+Fontawesome license: 
+
+    License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+
+Markerwithlabel license:
+
+    @name MarkerWithLabel for V3
+    @version 1.1.10 [April 8, 2014]
+    @author Gary Little (inspired by code from Marc Ridey of Google).
+    @copyright Copyright 2012 Gary Little [gary at luxcentral.com]
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+Everything not covered by these licenses is under GPL, copyright Alan Smithee.

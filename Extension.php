@@ -108,7 +108,7 @@ class Extension extends \Bolt\BaseExtension
         }
         $map = json_encode($map);
         $map = str_replace("'", "\\\"", $map);
-        $geolocation = (string)$args['geolocation'] ? 'true' : 'false';
+        $geolocation = $args['geolocation'] ? 'true' : 'false';
         $str = "<div class='map-canvas' data-mapobj='$map' data-geolocation='$geolocation'></div>";
         return new \Twig_Markup($str, 'UTF-8');
     }
