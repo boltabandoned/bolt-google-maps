@@ -1,5 +1,5 @@
 {
-	"name" : "boltabandoned/gmaps",
+	"name" : "boltabandoned/googlemaps",
 	"description" : "A google maps extension",
 	"type" : "bolt-extension",
 	"keywords" : [
@@ -22,7 +22,7 @@
 			"init.php"
 		],
 		"psr-4" : {
-			"Bolt\\Extension\\boltabandoned\\gmaps\\": ""
+			"Bolt\\Extension\\boltabandoned\\googlemaps\\": ""
 		}
 	},
     "extra": {

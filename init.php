@@ -1,6 +1,6 @@
 <?php
 /**
- * Gmaps extension for Bolt
+ * googlemaps extension for Bolt
  *
  * Copyright (C) 2014  Alan Smithee
  *
@@ -21,6 +21,6 @@
  * @copyright Alan Smithee (Is this even right?! Am I supposed to put my name here?)
  * @license   http://opensource.org/licenses/GPL-3.0 GNU Public License 3.0
  */
-use Bolt\Extension\boltabandoned\gmaps\Extension;
+use Bolt\Extension\boltabandoned\googlemaps\Extension;
 
 $app['extensions']->register(new Extension($app));

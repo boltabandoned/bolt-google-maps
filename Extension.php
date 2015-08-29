@@ -1,11 +1,11 @@
 <?php
-namespace Bolt\Extension\boltabandoned\gmaps;
+namespace Bolt\Extension\boltabandoned\googlemaps;
 class Extension extends \Bolt\BaseExtension
 {
 
     public function getName()
     {
-        return 'gmaps';
+        return 'Google Maps';
     }
 
     function initialize()
