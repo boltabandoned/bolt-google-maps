@@ -16,7 +16,7 @@ A simple map is usually constructed with named values passed to the map() functi
         latitude = record.geolocation.latitude,
         longitude = record.geolocation.longitude,
         html = record.body,
-        icon = "map-marker",
+        icon = "fa-map-marker",
     )}}
 
 ####Single geolocation field
@@ -30,7 +30,7 @@ You can set the HTML for the infopopup via the `html` argument. The default is t
     {{map(
         map = record.geolocation
         html = record.body,
-        icon = "map-marker",
+        icon = "fa-map-marker",
     )}}
 
 ####Multiple geolocation fields
