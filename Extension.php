@@ -1,5 +1,5 @@
 <?php
-namespace Bolt\Extension\sahassar\googlemaps;
+namespace Bolt\Extension\sahassar\gmaps;
 class Extension extends \Bolt\BaseExtension
 {
 

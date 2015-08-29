@@ -21,6 +21,6 @@
  * @copyright Svante Richter (Is this even right?! Am I supposed to put my name here?)
  * @license   http://opensource.org/licenses/GPL-3.0 GNU Public License 3.0
  */
-use Bolt\Extension\sahassar\googlemaps\Extension;
+use Bolt\Extension\sahassar\gmaps\Extension;
 
 $app['extensions']->register(new Extension($app));
