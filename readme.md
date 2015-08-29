@@ -1,7 +1,7 @@
 Bolt Google Maps
 ================================
 
-**This is the readme for v2, if you are using v1 you want to look at readme.v1.md**
+**This is the readme for v2, if you are using v1 you want to look at [the v1 readme](readme.v1.md)**
 
 
 This extension creates a twig function that takes a number of values and creates a google map via the v3 Google Maps API.
