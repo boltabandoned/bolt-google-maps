@@ -105,4 +105,6 @@ Markerwithlabel license:
     See the License for the specific language governing permissions and
     limitations under the License.
 
-Everything not covered by these licenses is under GPL, copyright Svante Richter.
+Everything not covered by these licenses is under GPLv3, copyright Svante Richter.
+
+**It is my understanding that the MIT, SIL OFL and Apache 2.0 Licenses should be compatible with the GPL. If I am wrong in that assumption or you have any other issues regarding this I'd love for you to open an issue or a pull request with those issues.**
