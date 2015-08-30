@@ -43,6 +43,7 @@ class Extension extends \Bolt\BaseExtension
             'visitor_icon' => "fa-male",
             'visitor_color' => "rgba(0,0,0,1)",
             'travel_mode' => 'driving',
+            'units' => 'metric',
         );
         $args = array_merge($defaults, $args);
         $args['html'] = (string)$args['html'];
@@ -114,6 +115,7 @@ class Extension extends \Bolt\BaseExtension
         $map = json_encode($map);
         $map = str_replace("'", "\\\"", $map);
         $travel_mode = $args['travel_mode'];
+        $units = $args['units'];
         $options = json_encode($args['options']);
         $options = str_replace("'", "\\\"", $options);
         $geolocation = $args['geolocation'] ? 'true' : 'false';
@@ -121,7 +123,7 @@ class Extension extends \Bolt\BaseExtension
         $duration_holder = $args['duration_holder'];
         $visitor_icon = $args['visitor_icon'];
         $visitor_color = $args['visitor_color'];
-        $str = "<div class='map-canvas' data-mapobj='$map' data-options='$options' data-geolocation='$geolocation' data-distance_holder='$distance_holder' data-duration_holder='$duration_holder' data-visitor_icon='$visitor_icon' data-visitor_color='$visitor_color' data-travel_mode='$travel_mode'></div>";
+        $str = "<div class='map-canvas' data-mapobj='$map' data-options='$options' data-geolocation='$geolocation' data-distance_holder='$distance_holder' data-duration_holder='$duration_holder' data-visitor_icon='$visitor_icon' data-visitor_color='$visitor_color' data-travel_mode='$travel_mode' data-units='$units'></div>";
         return new \Twig_Markup($str, 'UTF-8');
     }
 }
