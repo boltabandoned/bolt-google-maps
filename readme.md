@@ -14,6 +14,12 @@ output the distance and the time to get to a marker:
 
 ![Bolt google maps image](https://raw.githubusercontent.com/boltabandoned/bolt-google-maps/master/gmaps.png)
 
+The icon fields are compatible with `Raistlfiren/FAIconFieldType` and
+the color fields are compatible with `boltabandoned/bootstrapcolorpicker`.
+
+I recommend that you install those if non-techies will update those 
+fields.
+
 ####Named values
 
 A simple map is usually constructed with named values passed to the map()
