@@ -100,8 +100,8 @@ And overwriting what values to use also works just like a single record:
 ####Geolocation
 
 If you set `geolocation = true` it will try to get the visitors position and plot a route
-from them to the closest marker. The map is rendered first without geolocation, and the
-with after the visitor has accepted to share his or her location.
+from them to the closest marker. The map is rendered first without geolocation, and then
+with the directions after the visitor has accepted to share his or her location.
 
     {{map(
         record = record,
@@ -170,8 +170,9 @@ map. This an example of the JS options:
         afterDirections: function(element){} 
     }
 
-Almost every value and object used is a value in the element object which can be fetched by 
-querying the dom for your map. You can change these as you want before rendering.
+Almost every value and object used is a property of the element object which is supplied by
+these methods or can be fetched by querying the dom for your map. You can change these as 
+you want before rendering or in the methods.
 
 If you change them after rendering you will need to call `element.recreateMap()` to recreate
 the map with the new values. The element also has `element.destroyMap()` and `element.createMap()`
