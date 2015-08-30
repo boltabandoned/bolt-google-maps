@@ -12,15 +12,18 @@ class Extension extends \Bolt\BaseExtension
     {
         if ($this->app['config']->getWhichEnd()=='frontend') {
             if (!$this->app['config']->get('general/disable_script_injecting')){
-                $this->addJavascript(
-                    'assets/gmaps.js',
-                    array('late' => true, 'priority' => 1000)
-                );
+                $this->addSnippet('endofbody', 'mapscript');
                 $this->addCSS('assets/gmaps.css');
             }
             $this->addTwigFunction('map', 'map', array('is_variadic' => true));
         }
     }
+    
+    function mapscript(){
+        $basepath = $this->app['resources']->getUrl('extensions');
+        return "<script>if(document.getElementsByClassName('map-canvas').length > 0){document.write(\"<script src='".$basepath."vendor/boltabandoned/gmaps/assets/gmaps.js'><\/script>\")}</script>";
+    }
+    
     function map(array $args = array())
     {
         $defaults = array(
