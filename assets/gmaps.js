@@ -85,6 +85,7 @@ function mapInit() {
             element.places = JSON.parse(element.dataset.mapobj);
             element.mapSettings = {
                 styles: window.mapjs.mapstyles,
+                zoom: window.mapjs.defaultzoom,
                 disableDefaultUI: true,
                 scrollwheel: false,
                 navigationControl: false,
