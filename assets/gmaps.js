@@ -107,6 +107,7 @@ function mapInit() {
                     if (geoloc) {
                         element.places[i].distance = distance(element.coords.latitude, element.coords.longitude, element.places[i].latitude, element.places[i].longitude);
                     }
+
                     element.places[i].marker = new MarkerWithLabel({
                         labelAnchor: new google.maps.Point(8, 22),
                         icon: " ",
@@ -163,8 +164,8 @@ function mapInit() {
                         latitude: response.coords.latitude,
                         longitude: response.coords.longitude
                     };
-                    mapjs.afterGeoloc(element);
                     addToMap(true);
+                    mapjs.afterGeoloc(element);
                 })
             }
         }
