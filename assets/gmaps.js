@@ -27,18 +27,22 @@ function mapInit() {
         element.directionsService.route(element.directionOptions, function (response) {
             element.directions = response;
             if (response.routes.length){
+                if(element.dataset.duration_holder){
                 [].forEach.call(
                     document.querySelectorAll(element.dataset.duration_holder), 
                     function(elem){
                         elem.innerHTML = response.routes[0].legs[0].duration.text
                     }
                 );
+                }
+                if(element.dataset.distance_holder){
                [].forEach.call(
                     document.querySelectorAll(element.dataset.distance_holder), 
                     function(elem){
                         elem.innerHTML = response.routes[0].legs[0].distance.text
                     }
                 );
+                }
             }
             element.bounds = new google.maps.LatLngBounds;
             element.bounds.extend(element.places[0].marker.position);
