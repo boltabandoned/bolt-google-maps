@@ -17,6 +17,11 @@ output the distance and the time to get to a marker:
 The icon fields are compatible with `Raistlfiren/FAIconFieldType` and
 the color fields are compatible with `boltabandoned/bootstrapcolorpicker`.
 
+**The map has no set height by default. This is because it is often
+used in situations where no height should be set (like in a flex
+grid). In your css just enter `.map-canvas{height:50vh}` or 
+whatever height you want.**
+
 I recommend that you install those if non-techies will update those 
 fields.
 
