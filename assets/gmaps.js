@@ -190,7 +190,7 @@ function initializeMap() {
 window.onload = function () {
     if (document.getElementsByClassName("map-canvas").length > 0) {
         var el = document.createElement("script");
-        el.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initializeMap";
+        el.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initializeMap";
         document.querySelector("body").appendChild(el);
     }
 };
