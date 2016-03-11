@@ -189,11 +189,92 @@ If you want to do this manually.
  - If you put the `disable_script_injecting: true` in the global config the extension will not
    load it's usual scripts and styles. This is useful for when you want to include them in your
    own scripts and styles, load them via a cdn or modify them.
- - The extensions fontawesome only has the woff file embeded, and therefore will not be
-   compatible with IE8-. If you want comaptability with IE8- you need to put 
-   `disable_script_injecting: true` in your main configuration and load your own fontawesome.
  - The scripts have no external dependencies except the Google Maps API.
+ - You can use leaflet instead of Google Maps by setting `disable_script_injecting: true`, including leaflet and putting the below script in your JS:
+ 
+ ```
+ Array.prototype.forEach.call(document.getElementsByClassName("map-canvas"), function (elem) {
+    var places = JSON.parse(elem.dataset.mapobj);
+    var center = L.latLngBounds([places[0].latitude, places[0].longitude], [places[1].latitude, places[1].longitude]);
+    places.forEach(function(place){
+        center.extend([ place.latitude, place.longitude ]);
+    })
+    var map = L.map(elem, {
+        scrollWheelZoom: false,
+        center: center.getCenter(),
+        layers: [L.tileLayer('/tileserver{s}/light_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        })],
+        zoom: 11
+    }).fitBounds(center);
+    places.forEach(function(place){
+        var cssIcon = L.divIcon({
+            className: typeof place.icon == "string" ? 'fa ' + place.icon : 'fa fa-taxi',
+            iconSize: typeof place.iconSize == "array" ? place.icon : [20, 37]
+        });
+        L.Icon.Default.imagePath = '/cssmodules/images';
+        L.marker(
+            [ place.latitude, place.longitude ],
+            { icon: cssIcon }
+        ).bindPopup(
+            L.popup()
+            .setContent(place.html)
+        ).addTo(map);
+    })
+    map.fitBounds(center);
+});
+ ```
+ 
+This example assumes that you proxy the tiles on your server (a good idea if 
+you are using http2), so you need to add the following to your nginx config (of 
+course tweak these settings to fit your need, these are for cartodb maps):
 
+```
+# In your http block:
+proxy_cache_path /var/www/osm_cache levels=1:2 keys_zone=openstreetmap-backend-cache:512m max_size=5000m inactive=365d use_temp_path=on;
+proxy_temp_path /var/www/osm_cache/tmp;
+proxy_cache_revalidate off;
+proxy_request_buffering off;
+upstream openstreetmap_backend {
+    server cartodb-basemaps-a.global.ssl.fastly.net;
+    server cartodb-basemaps-b.global.ssl.fastly.net;
+    server cartodb-basemaps-c.global.ssl.fastly.net;
+    server cartodb-basemaps-d.global.ssl.fastly.net;
+}
+	
+# In your server block
+location ^~ /tileserver {
+    rewrite ^/tileserver([a-z])(/.*)$ $2 break;
+    proxy_pass  https://cartodb-basemaps-a.global.ssl.fastly.net;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+	add_header X-Cache-Status $upstream_cache_status;
+	proxy_cache_revalidate off;
+	proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie Vary;
+	proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
+	proxy_cache openstreetmap-backend-cache;
+    proxy_redirect off;
+	proxy_cache_key $uri;
+	proxy_cache_valid 365d;
+	expires 365d;
+	etag off;
+	proxy_hide_header Set-Cookie;
+	proxy_hide_header ETag;
+	proxy_hide_header X-Cache;
+	proxy_hide_header fastly-debug-digest;
+	proxy_hide_header x-cache-hits;
+	proxy_hide_header x-cdbm;
+	proxy_hide_header x-served-by;
+	proxy_hide_header access-control-allow-headers;
+	proxy_hide_header access-control-allow-origin;
+	proxy_hide_header age;
+	proxy_hide_header Via;
+	proxy_hide_header X-Cache-Lookup;
+	proxy_hide_header Cache-Control;
+}
+``` 
+ 
 ####Licenses
 
 Fontawesome license: 
