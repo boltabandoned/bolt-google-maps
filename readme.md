@@ -139,13 +139,13 @@ https://developers.google.com/maps/documentation/javascript/reference?hl=en#MapO
 
     {{map(
         record = record,
-        options = {
+        google_options = {
             scrollwheel: true,
             navigationControl: true,
             mapTypeControl: true,
             scaleControl: true,
             draggable: true,
-            disableDefaultUI: false,
+            disableDefaultUI: false
         }
     )}}
     
@@ -178,10 +178,6 @@ map. This an example of the JS options:
 Almost every value and object used is a property of the element object which is supplied by
 these methods or can be fetched by querying the dom for your map. You can change these as 
 you want before rendering or in the methods.
-
-If you change them after rendering you will need to call `element.recreateMap()` to recreate
-the map with the new values. The element also has `element.destroyMap()` and `element.createMap()`
-If you want to do this manually.
 
 
 ####A couple of notes

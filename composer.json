@@ -1,32 +1,30 @@
 {
-	"name" : "boltabandoned/gmaps",
-	"description" : "A google maps extension",
-	"type" : "bolt-extension",
+    "name": "boltabandoned/gmaps",
+    "type": "bolt-extension",
+    "description" : "A google maps extension",
 	"keywords" : [
-		"google maps",
+        "google maps",
         "google",
         "maps"
 	],
-	"require" : {
-		"bolt/bolt": ">=2.2.0,<3.0.0",
-		"php" : ">=5.3"
-	},
-	"license" : "GPL",
-	"authors" : [{
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "license": "GPL",
+    "authors": [
+        {
 			"name" : "Alan Smithee",
 			"email" : "alan.smithee@example.com"
 		}
-	],
-	"autoload" : {
-		"files" : [
-			"init.php"
-		],
-		"psr-4" : {
-			"Bolt\\Extension\\boltabandoned\\gmaps\\": ""
-		}
-	},
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\boltabandoned\\gmaps\\": "src"
+        }
+    },
     "extra": {
-        "bolt-assets": "assets",
-        "bolt-icon": "assets/gmaps-icon.png"
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\boltabandoned\\gmaps\\gmapsExtension",
+        "bolt-icon": "web/gmaps-icon.png"
     }
 }

@@ -19,24 +19,24 @@ function initializeMap() {
             element.directionOptions = {
                 origin: new google.maps.LatLng(element.coords.latitude, element.coords.longitude),
                 destination: new google.maps.LatLng(element.places[0].latitude, element.places[0].longitude),
-                travelMode: google.maps.DirectionsTravelMode[element.dataset.travel_mode.toUpperCase()],
-                unitSystem: google.maps.UnitSystem[element.dataset.units.toUpperCase()]
+                travelMode: google.maps.DirectionsTravelMode[element.options.travel_mode.toUpperCase()],
+                unitSystem: google.maps.UnitSystem[element.options.units.toUpperCase()]
             };
 
             element.directionsService.route(element.directionOptions, function (response) {
                 element.directions = response;
                 if (response.routes.length) {
-                    if (element.dataset.duration_holder) {
-                [].forEach.call(
-                            document.querySelectorAll(element.dataset.duration_holder),
+                    if (element.options.duration_holder) {
+                        [].forEach.call(
+                            document.querySelectorAll(element.options.duration_holder),
                             function (elem) {
                                 elem.innerHTML = response.routes[0].legs[0].duration.text
                             }
                         );
                     }
-                    if (element.dataset.distance_holder) {
-               [].forEach.call(
-                            document.querySelectorAll(element.dataset.distance_holder),
+                    if (element.options.distance_holder) {
+                        [].forEach.call(
+                            document.querySelectorAll(element.options.distance_holder),
                             function (elem) {
                                 elem.innerHTML = response.routes[0].legs[0].distance.text
                             }
@@ -50,9 +50,9 @@ function initializeMap() {
                 element.visitorMarker = new MarkerWithLabel({
                     labelAnchor: new google.maps.Point(8, 22),
                     icon: " ",
-                    labelContent: '<i class="fa ' + element.dataset.visitor_icon + ' fa-2x" style="color:' + element.dataset.visitor_color + ';"></i>',
+                    labelContent: '<i class="fa ' + element.options.visitor_icon + ' fa-2x" style="color:' + element.options.visitor_color + ';"></i>',
                     labelStyle: {
-                        color: element.dataset.visitor_color
+                        color: element.options.visitor_color
                     },
                     position: new google.maps.LatLng(element.coords.latitude, element.coords.longitude),
                     map: element.map
@@ -87,7 +87,7 @@ function initializeMap() {
             mapjs.beforeRender(element);
             element.createMap = function () {
                 element.places = JSON.parse(element.dataset.mapobj);
-                element.mapSettings = {
+                var mapSettings = {
                     styles: window.mapjs.mapstyles,
                     zoom: window.mapjs.defaultzoom,
                     disableDefaultUI: true,
@@ -98,10 +98,10 @@ function initializeMap() {
                     draggable: false
                 };
                 element.options = JSON.parse(element.dataset.options);
-                for (var attr in element.options) {
-                    element.mapSettings[attr] = element.options[attr];
+                for (var attr in element.options.google_options) {
+                    mapSettings[attr] = element.options.google_options[attr];
                 }
-                element.map = new google.maps.Map(element, element.mapSettings);
+                element.map = new google.maps.Map(element, mapSettings);
                 element.bounds = new google.maps.LatLngBounds;
                 element.infoWindow = new google.maps.InfoWindow;
 
@@ -162,7 +162,7 @@ function initializeMap() {
                     }
                 };
                 addToMap(false);
-                if (element.dataset.geolocation == "true" && "geolocation" in navigator) {
+                if (element.options.geolocation == true && "geolocation" in navigator) {
                     mapjs.beforeGeoloc(element);
                     navigator.geolocation.getCurrentPosition(function (response) {
                         element.coords = {
@@ -175,22 +175,13 @@ function initializeMap() {
                 }
             }
             element.createMap();
-            element.destroyMap = function () {
-                delete(element.map);
-            };
-            element.recreateMap = function () {
-                delete(element.map);
-                element.createMap();
-            };
             mapjs.afterRender(element);
         })
     }
     google.maps.event.addDomListener(window, "load", mapInit());
 }
-window.onload = function () {
-    if (document.getElementsByClassName("map-canvas").length > 0) {
-        var el = document.createElement("script");
-        el.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initializeMap";
-        document.querySelector("body").appendChild(el);
-    }
-};
+if (document.getElementsByClassName("map-canvas").length > 0) {
+    var el = document.createElement("script");
+    el.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initializeMap";
+    document.querySelector("body").appendChild(el);
+}
