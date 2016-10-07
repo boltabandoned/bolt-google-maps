@@ -5,6 +5,7 @@ namespace Bolt\Extension\boltabandoned\gmaps;
 use Bolt\Extension\SimpleExtension;
 
 use Bolt\Asset\Target;
+use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\File\Stylesheet;
 
@@ -47,6 +48,8 @@ class gmapsExtension extends SimpleExtension
         'maps'
     ];
 
+    private $assetsAdded = false;
+
     protected function registerTwigFunctions()
     {
         return [
@@ -62,24 +65,48 @@ class gmapsExtension extends SimpleExtension
     protected function registerAssets()
     {
         $app = $this->getContainer();
-        $assets = [];
+        $fileAssets = [];
+        $snippetAssets = [];
+
         if (!$app['config']->get('general/gmaps_disable_script', false)){
             array_push(
-                $assets,
-                new JavaScript('gmaps.js')
+                $snippetAssets,
+                (new Snippet())->setCallback([$this, 'callbackSnippet'])->setLocation(Target::END_OF_BODY)
+            );
+            array_push(
+                $fileAssets,
+                (new JavaScript('gmaps.js'))->setLocation(Target::END_OF_BODY)
             );
         }
         if (!$app['config']->get('general/gmaps_disable_style', false)){
             array_push(
-                $assets,
+                $fileAssets,
                 new Stylesheet('gmaps.css')
             );
         }
-        return $assets;
+        $this->fileQueue = $fileAssets;
+        $this->snippetQueue = $snippetAssets;
+    }
+
+    public function callbackSnippet()
+    {
+        return '<script>var gapikey = "'.($this->getContainer())['config']->get('general/google_api_key').'"</script>';
     }
 
     public function map(array $args = [])
     {
+        $app = $this->getContainer();
+        if(!$this->assetsAdded){
+            foreach($this->fileQueue as $asset){
+                $file = $this->getWebDirectory()->getFile($asset->getPath());
+                $asset->setPackageName('extensions')->setPath($file->getPath());
+                $app['asset.queue.file']->add($asset);
+            }
+            foreach($this->snippetQueue as $asset){
+                $app['asset.queue.snippet']->add($asset);
+            }
+            $this->assetsAdded = true;
+        }
         $this->args = array_merge($this->defaults, $args);
 
         $this->unifyData();

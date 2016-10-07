@@ -180,8 +180,10 @@ function initializeMap() {
     }
     google.maps.event.addDomListener(window, "load", mapInit());
 }
-if (document.getElementsByClassName("map-canvas").length > 0) {
-    var el = document.createElement("script");
-    el.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initializeMap";
-    document.querySelector("body").appendChild(el);
-}
+document.addEventListener("DOMContentLoaded", function(event) {
+    if (document.getElementsByClassName("map-canvas").length > 0) {
+        var el = document.createElement("script");
+        el.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initializeMap&key="+gapikey;
+        document.querySelector("body").appendChild(el);
+    }
+});
