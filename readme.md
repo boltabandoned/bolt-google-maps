@@ -1,11 +1,6 @@
 Bolt Google Maps
 ================================
 
-**Since the weekend of w25 2016 google requires api keys for all new domains
-using google maps. I'll be adding that option in the near future, and also
-providing a more official way to use OSM in it's place. Any existing
-installs/domains should continue to work for now.**
-
 **This is the readme for v2, if you are using v1 you want to look at
 [the v1 readme](readme.v1.md)**
 
