@@ -95,7 +95,8 @@ class gmapsExtension extends SimpleExtension
 
     public function callbackSnippet()
     {
-        return '<script>var gapikey = "'.($this->getContainer())['config']->get('general/google_api_key').'"</script>';
+        $container = $this->getContainer();
+        return '<script>var gapikey = "'.$container['config']->get('general/google_api_key').'"</script>';
     }
 
     public function map(array $args = [])
