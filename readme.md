@@ -25,7 +25,7 @@ whatever height you want.**
 I recommend that you install those if non-techies will update those 
 fields.
 
-####Named values
+#### Named values
 
 A simple map is usually constructed with named values passed to the map()
 function, like this:
@@ -37,7 +37,7 @@ function, like this:
         icon = "fa-map-marker"
     )}}
 
-####Single map field
+#### Single map field
 
 You can also supply it with the bolt geolocation object directly like this:
 
@@ -53,7 +53,7 @@ icon with the `icon` argument:
         icon = "fa-map-marker"
     )}}
 
-####Multiple map fields
+#### Multiple map fields
 
 Multiple geolocation objects also work, which is useful for when you build a
 map from multiple contenttypes:
@@ -64,7 +64,7 @@ map from multiple contenttypes:
     {% endfor %}
     {{map( maps = maps )}}
 
-####Single record
+#### Single record
 
 You can also pass a single record, which will assume that your geolocation field
 is called `geolocation`, your html field is called `body`, your icon field is
@@ -84,7 +84,7 @@ You can change where it looks for these values by following this example:
     
 The values passed are the names of the fields you want to use for the respective property.
 
-####Multiple records
+#### Multiple records
 
 Just like passing a record you can also pass multiple records to the function. Just like
 in the previous example you can change which fields it looks for by passing additional
@@ -102,7 +102,7 @@ And overwriting what values to use also works just like a single record:
         color_field = "color"
     )}}
     
-####Geolocation
+#### Geolocation
 
 If you set `geolocation = true` it will try to get the visitors position and plot a route
 from them to the closest marker. The map is rendered first without geolocation, and then
@@ -131,7 +131,7 @@ information to the visitor. duration_holder and distance_holder take any valid s
     )}}
     
     
-####Additional options
+#### Additional options
 
 By default the map will not allow for zooming, scrolling or panning. You can change this by
 passing an options array, which will set the the mapoptions. See here for a reference:
@@ -149,7 +149,7 @@ https://developers.google.com/maps/documentation/javascript/reference?hl=en#MapO
         }
     )}}
     
-####JS
+#### JS
 
 The JS has a couple of calls that you can implement to modify the data or appearace of the
 map. This an example of the JS options:
@@ -180,7 +180,7 @@ these methods or can be fetched by querying the dom for your map. You can change
 you want before rendering or in the methods.
 
 
-####A couple of notes
+#### A couple of notes
 
  - If you put the `disable_script_injecting: true` in the global config the extension will not
    load it's usual scripts and styles. This is useful for when you want to include them in your
@@ -260,7 +260,7 @@ location ^~ /tileserver {
 }
 ``` 
  
-####Licenses
+#### Licenses
 
 Fontawesome license: 
 
