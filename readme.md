@@ -237,7 +237,7 @@ upstream openstreetmap_backend {
     server cartodb-basemaps-c.global.ssl.fastly.net;
     server cartodb-basemaps-d.global.ssl.fastly.net;
 }
-	
+    
 # In your server block
 location ^~ /tileserver {
     rewrite ^/tileserver([a-z])(/.*)$ $2 break;
@@ -245,29 +245,18 @@ location ^~ /tileserver {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto https;
-	add_header X-Cache-Status $upstream_cache_status;
-	proxy_cache_revalidate off;
-	proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie Vary;
-	proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
-	proxy_cache openstreetmap-backend-cache;
+    add_header X-Cache-Status $upstream_cache_status;
+    proxy_cache_revalidate off;
+    proxy_ignore_headers X-Accel-Expires Expires Cache-Control Set-Cookie Vary;
+    proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
+    proxy_cache openstreetmap-backend-cache;
     proxy_redirect off;
-	proxy_cache_key $uri;
-	proxy_cache_valid 365d;
-	expires 365d;
-	etag off;
-	proxy_hide_header Set-Cookie;
-	proxy_hide_header ETag;
-	proxy_hide_header X-Cache;
-	proxy_hide_header fastly-debug-digest;
-	proxy_hide_header x-cache-hits;
-	proxy_hide_header x-cdbm;
-	proxy_hide_header x-served-by;
-	proxy_hide_header access-control-allow-headers;
-	proxy_hide_header access-control-allow-origin;
-	proxy_hide_header age;
-	proxy_hide_header Via;
-	proxy_hide_header X-Cache-Lookup;
-	proxy_hide_header Cache-Control;
+    proxy_cache_key $uri;
+    proxy_cache_valid 365d;
+    expires 365d;
+    etag off;
+    proxy_hide_header Set-Cookie;
+    proxy_hide_header ETag;
 }
 ``` 
  
@@ -294,7 +283,3 @@ Markerwithlabel license:
     limitations under the License.
 
 Everything not covered by these licenses is under GPLv3, copyright Alan Smithee.
-
-**It is my understanding that the MIT, SIL OFL and Apache 2.0 Licenses should be compatible with the
-GPL. If I am wrong in that assumption or you have any other issues regarding this I'd love for you to
-open an issue or a pull request with those issues.**
