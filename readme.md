@@ -1,3 +1,7 @@
+### Looking for a maintainer
+
+This repo needs a maintainer, if you want to take it over open an issue.
+
 Bolt Google Maps
 ================================
 
